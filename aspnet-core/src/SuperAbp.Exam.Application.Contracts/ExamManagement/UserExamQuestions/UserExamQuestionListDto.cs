@@ -15,7 +15,7 @@ namespace SuperAbp.Exam.ExamManagement.UserExamQuestions
         public Guid QuestionId { get; set; }
         public int QuestionType { get; set; }
         public decimal QuestionScore { get; set; }
-        public string Answers { get; set; }
+        public string? Answers { get; set; }
 
         public List<QuestionAnswerListDto> QuestionAnswers { get; set; }
 

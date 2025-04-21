@@ -79,6 +79,7 @@
     }
 }
 
+@using JetBrains.Annotations
 @using SuperAbp.Exam.QuestionManagement.QuestionAnswers
 @using SuperAbp.Exam.Blazor.Model
 @using SuperAbp.Exam.Blazor.Pages
@@ -94,8 +95,7 @@
     public List<QuestionAnswerItem> SelectedQuestionAnswers { get; set; }
     [Parameter]
     public bool ShowAnalysis { get; set; }
-    [Parameter]
-    public string Answered { get; set; }
+    [Parameter] [CanBeNull] public string Answered { get; set; }
     [Parameter]
     public EventCallback<QuestionAnswerSelectEventArgs> OnSelect { get; set; }
     [Parameter]

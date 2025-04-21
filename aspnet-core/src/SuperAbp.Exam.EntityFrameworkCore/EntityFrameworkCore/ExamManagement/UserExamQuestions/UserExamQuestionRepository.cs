@@ -16,8 +16,8 @@ namespace SuperAbp.Exam.EntityFrameworkCore.ExamManagement.UserExamQuestions
         : EfCoreRepository<ExamDbContext, UserExamQuestion, Guid>(dbContextProvider), IUserExamQuestionRepository
     {
         // TODO:编写仓储代码
-        public async Task<List<UserExamQuestionWithDetails>> GetListAsync(string? sorting = null, int skipCount = 0, int maxResultCount = Int32.MaxValue,
-            Guid? userExamId = null, CancellationToken cancellationToken = default)
+        public async Task<List<UserExamQuestionWithDetails>> GetListAsync(Guid userExamId, string? sorting = null, int skipCount = 0, int maxResultCount = Int32.MaxValue,
+            CancellationToken cancellationToken = default)
         {
             var dbContext = await GetDbContextAsync();
             var examQuestionQueryable = await GetQueryableAsync();
@@ -27,6 +27,7 @@ namespace SuperAbp.Exam.EntityFrameworkCore.ExamManagement.UserExamQuestions
             var questions = await (from e in examQuestionQueryable
                                    join q in questionQueryable on e.QuestionId equals q.Id
                                    join a in questionAnswerQueryable on q.Id equals a.QuestionId into questionAnswers
+                                   where e.UserExamId == userExamId
                                    select new UserExamQuestionWithDetails()
                                    {
                                        Id = e.Id,

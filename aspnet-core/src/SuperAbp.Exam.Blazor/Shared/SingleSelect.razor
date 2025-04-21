@@ -74,6 +74,7 @@
 @using SuperAbp.Exam.TrainingManagement
 @using SuperAbp.Exam.QuestionManagement.QuestionAnswers
 @using System.Diagnostics
+@using JetBrains.Annotations
 @using SuperAbp.Exam.Blazor.Model
 @using SuperAbp.Exam.Blazor.Pages
 @using Volo.Abp
@@ -89,16 +90,17 @@
     public List<QuestionAnswerItem> SelectedQuestionAnswers { get; set; }
     [Parameter]
     public bool ShowAnalysis { get; set; }
-    [Parameter]
+    [Parameter] 
+    [CanBeNull] 
     public string Answered { get; set; }
     [Parameter]
     public EventCallback<QuestionAnswerItem> OnSubmit { get; set; }
 
-    Guid _selectedAnswerId = new Guid();
+    Guid _selectedAnswerId = Guid.Empty;
 
     protected override void OnInitialized()
     {
-        _selectedAnswerId = new Guid();
+        _selectedAnswerId = Guid.Empty;
         if (!Answered.IsNullOrWhiteSpace())
         {
             _selectedAnswerId = new Guid(Answered);
